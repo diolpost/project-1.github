@@ -1,0 +1,49 @@
+body {
+  max-width: 600px;
+  margin: auto;
+}
+.container {
+  background: linear-gradient(#0e8388, #2e4f4f);
+  padding: 50px 50px;
+  border-radius: 10px;
+  display: block;
+}
+h1 {
+  font-size: 60px;
+  font-family: "Tilt Warp", cursive;
+}
+.temp {
+  text-align: center;
+}
+.title {
+  color: rgb(194, 246, 234);
+  margin-left: 30px;
+}
+.look {
+  top: 10px;
+  border-radius: 20px;
+}
+li {
+  list-style: none;
+}
+.other {
+  border: 20px;
+}
+.col {
+  display: grid;
+  place-items: center;
+}
+.border-3 {
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgba(203, 228, 222, 0.4);
+  border-radius: 10px;
+  --bs-border-color: rgb(46, 79, 79);
+}
+input {
+  background-color: rgba(46, 79, 79, 0.5);
+  border-radius: 10px;
+  border-color: rgb(46, 79, 79);
+}
