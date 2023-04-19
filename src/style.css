@@ -1,12 +1,11 @@
-body {
-  max-width: 600px;
-  margin: auto;
-}
+
 .container {
   background: linear-gradient(#0e8388, #2e4f4f);
   padding: 50px 50px;
   border-radius: 10px;
   display: block;
+  max-width: 600px;
+    margin: auto;
 }
 h1 {
   font-size: 60px;
@@ -46,4 +45,8 @@ input {
   background-color: rgba(46, 79, 79, 0.5);
   border-radius: 10px;
   border-color: rgb(46, 79, 79);
+}
+footer{
+  display: block;
+  margin:auto;
 }
