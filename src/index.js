@@ -26,6 +26,9 @@ function showTemperature(response) {
   let temp = Math.round(response.data.main.temp);
   let curTemp = document.querySelector("#currentTemperature");
   curTemp.innerHTML=`${temp}°`;
+  celsiusTemperature = response.data.main.temp;
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+
 
   let humidity = (document.querySelector("#Humidity").innerHTML =
     response.data.main.humidity);
@@ -41,6 +44,31 @@ function showTemperature(response) {
     response.data.main.precipitation;
     iconElement.innerHTML
 }
+
+function showFahrenheit(event){
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#currentTemperature");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
+}
+
+function showCelsius(event){
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#currentTemperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+let celsiusTemperature = null;
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click",showCelsius);
+
+
 function changeCity(event) {
   event.preventDefault();
   let city = document.querySelector("#currentCity");
