@@ -20,6 +20,8 @@
 
 <body>
   <div class="container">
+    <div class="container-web-wrapper">
+   <div class="weather-web">
     <div class="row">
       <div class="col">
         <h1 class="title">
@@ -46,18 +48,19 @@
           New York
 
         </h1>
-        <h3>
+        <h3 id="currentDate">
 
-          Tuesday 4:00
+        Tuesday 4:00
 
         </h3>
       </div>
       <div class="col">
-        <h1 id="currentTemperature">
-          54°
-          <br>
-          🌤️
+        <div class="clearfix weather-temperature">
+        <h1 >
+         <span id="currentTemperature">54</span> <span class="units">C</span>
+         <img src="" alt="Clear" id="icon" class="float-left" />
         </h1>
+      </div>
       </div>
       <div class="col">
 
@@ -80,9 +83,15 @@
       <div class="col"><span class="border border-3"><strong>Thu</strong><br>52°<br>🌤️</span></div>
       <div class="col"><span class="border border-3"><strong>Fri</strong><br>54°<br>☀️</span></div>
     </div>
+    
+    
+  </div>
+
+  </div>
+  <small> <a href="https://github.com/diolpost/project-1.github">Open source code </a> by Di</small>
   </div>
   </div>
-  <footer> <a href="https://github.com/diolpost/project-1.github">Open source code </a> by Di</footer>
+  
   <script src="src/index.js"></script>
 </body>
 
