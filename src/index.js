@@ -25,25 +25,24 @@ function showTemperature(response) {
   console.log(response.data.main.temp);
   let temp = Math.round(response.data.main.temp);
   let curTemp = document.querySelector("#currentTemperature");
+   let humidity = (document.querySelector("#Humidity").innerHTML =
+    response.data.main.humidity);
+    let iconElement= document.querySelector("#current-weather-icon");
+
   curTemp.innerHTML=`${temp}°`;
   celsiusTemperature = response.data.main.temp;
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
-
-
-  let humidity = (document.querySelector("#Humidity").innerHTML =
-    response.data.main.humidity);
-
-    let iconElement= document.querySelector("icon");
-    console.log
-    iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
- iconElement.setAttribute("alt", response.data.weather[0].description);
-
-    document.querySelector("#Wind").innerHTML = Math.round(
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+document.querySelector("#Wind").innerHTML = Math.round(
     response.data.wind.speed
   );
   document.querySelector("#Precipitation").innerHTML =
     response.data.main.precipitation;
-    iconElement.innerHTML
+    
 }
 
 function showFahrenheit(event){

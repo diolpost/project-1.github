@@ -59,7 +59,7 @@
         
          <span class="currentTemperature" id="currentTemperature">54</span> <span class="units"><a href="#" id="celsius-link" class="active">°C</a> |
         <a href="#" id="fahrenheit-link">°F</a></span>
-         <img src="" alt="Clear" id="icon" class="float-left" />
+        <div class="icon"><img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="55" /></div>
         
       </div>
       </div>
@@ -78,11 +78,21 @@
     <br>
     <div class="row" class="other">
 
-      <div class="col"><span class="border border-3"><strong>Mon</strong><br>46°<br>🌧️</span></div>
-      <div class="col"><span class="border border-3"><strong>Tue</strong><br>53°<br>🌥️</span></div>
-      <div class="col"><span class="border border-3"><strong>Wed</strong><br>55°<br>☀️</span></div>
-      <div class="col"><span class="border border-3"><strong>Thu</strong><br>52°<br>🌤️</span></div>
-      <div class="col"><span class="border border-3"><strong>Fri</strong><br>54°<br>☀️</span></div>
+      <div class="col" class="weather-forecast">
+          <div class="weather-forecast-date">
+            <strong>Mon</strong>
+          </div>
+          <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="42" />
+          <div class="weather-forecast-temperatures">
+            <span class="weather-forecast-temperature-max"> 
+              46°/
+            </span>
+            <span class="weather-forecast-temperature-min">
+              23°
+            </span>
+          </div>
+      </div>
+     
     </div>
     
     
