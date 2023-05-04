@@ -69,6 +69,7 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click",showCelsius);
 
 
+
 function changeCity(event) {
   event.preventDefault();
   let city = document.querySelector("#currentCity");
@@ -80,3 +81,34 @@ function changeCity(event) {
   console.log(apiUrl);
   axios.get(apiUrl).then(showTemperature);
 }
+
+function displayForecast(){
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML =`<div class="row">`;
+  let days = ["Thu", "Fri", "Sat", "Sun"];
+  days.forEach(function(day){
+forecastHTML= forecastHTML+` 
+  
+   <div class="col-2" class="weather-forecast" id="forecast">
+          <div class="weather-forecast-date">
+            <strong>${day}</strong>
+          </div>
+          <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="42" />
+          <div class="weather-forecast-temperatures">
+            <span class="weather-forecast-temperature-max"> 
+              46°/
+            </span>
+            <span class="weather-forecast-temperature-min">
+              23°
+            </span>
+          </div>
+      </div>
+      `;
+     });
+  forecastHTML=forecastHTML+`</div>`;
+  forecastElement.innerHTML=forecastHTML;
+
+
+};
+displayForecast();
