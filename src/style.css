@@ -1,52 +1,83 @@
-
-.container {
-  background: linear-gradient(#0e8388, #2e4f4f);
+.weather-web-wrapper{
+  max-width: 600px;
+  margin:30px auto;
+}
+.weather-web {
+  background: linear-gradient(#fc7dcd, #77dbdb);
   padding: 50px 50px;
   border-radius: 10px;
   display: block;
-  max-width: 600px;
-    margin: auto;
+  
+  margin: auto;
 }
+
+
 h1 {
   font-size: 60px;
   font-family: "Tilt Warp", cursive;
 }
+
 .temp {
   text-align: center;
 }
+
 .title {
   color: rgb(194, 246, 234);
   margin-left: 30px;
+}
+.currentDate{
+  margin:10px, auto;
+}
+.currentTemperature{
+  font-size: 45px;
+
+}
+.weather-temperature .active{
+  color: rgb(33,33,33);
+  cursor: default;
+}
+.weather-temperature:link{
+  color: #2e4f4f;
+}
+.weather-temperature .active:hover{
+  text-decoration: none;
+  color:rgb(194, 246, 234) ;
+}
+.weather-forecast{
+  padding: 10px;
+  border:black;
+background-color: rgba(227, 237, 235, 0.4);
+}
+.weather-forecast-temperatures{
+  font-size: 20px;
+}
+.weather-forecast-temperature-min{
+  opacity: 0.7;
+  font-size: 17px;
 }
 .look {
   top: 10px;
   border-radius: 20px;
 }
+
 li {
   list-style: none;
 }
-.other {
-  border: 20px;
+h1:first-letter {
+  text-transform: capitalize;
 }
+
+
+
 .col {
   display: grid;
   place-items: center;
 }
-.border-3 {
-  padding: 20px;
-  font-size: 20px;
-  text-align: center;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  background-color: rgba(203, 228, 222, 0.4);
-  border-radius: 10px;
-  --bs-border-color: rgb(46, 79, 79);
-}
+
+
+
 input {
-  background-color: rgba(46, 79, 79, 0.5);
+  background-color: rgba(46, 79, 79, 0.v5);
   border-radius: 10px;
   border-color: rgb(46, 79, 79);
-}
-footer{
-  display: block;
-  margin:auto;
 }
