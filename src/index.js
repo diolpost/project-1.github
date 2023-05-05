@@ -1,43 +1,55 @@
-function currentTime() {
-  let now = new Date();
+function currentTime(timestamp) {
+  let date = new Date(timestamp);
+  let hours = now.getHours();
   let minutes = now.getMinutes();
-  if (minutes < 10) {
+   if (minutes < 10) {
     minutes = `0${minutes}`;
   } // 0,1,2, 12
-  let hours = now.getHours();
+
   if (hours < 10) {
     hours = `0${hours}`;
   } //1, 2, 3, 4
-  let h3 = document.querySelector("currentDate");
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let day = days[now.getDay()];
-  currentDate.innerHTML = `${day}, ${hours}:${minutes}`;
+  let days = 
+  ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  let day = days[date.getDay()];
+  return `${day} ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+
 function displayForecast(response){
-  console.log(response.data.daily);
-  let forecastElement = document.querySelector("#forecast");
-let days = ["Thu", "Fri", "Sat", "Sun"];
+let forecast = response.data.daily;
+  
+let forecastElement = document.querySelector("#forecast");
+
+
   let forecastHTML =`<div class="row">`;
   
-  days.forEach(function(day){
+  forecast.forEach(function (forecastDay, index) {
+   if (index < 6){
 forecastHTML= forecastHTML+` 
   
    <div class="col-2" class="weather-forecast" id="forecast">
           <div class="weather-forecast-date">
-            <strong>${day}</strong>
+            <strong>${formatDay(forecastDay.time)}</strong>
           </div>
-          <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="42" />
+          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+              forecastDay.condition.icon
+            }.png" alt=""
+              width="42" />
           <div class="weather-forecast-temperatures">
-            <span class="weather-forecast-temperature-max"> 
-              46°/
-            </span>
-            <span class="weather-forecast-temperature-min">
-              23°
-            </span>
+            ${Math.round(forecastDay.temperature.maximum)}° </span>
+              <span class="weather-forecast-temperature-min">
+                ${Math.round(forecastDay.temperature.minimum)}° </span>
           </div>
-      </div>
-      `;
+      </div>`;}
      });
   forecastHTML=forecastHTML+`</div>`;
   forecastElement.innerHTML=forecastHTML;
@@ -45,48 +57,48 @@ forecastHTML= forecastHTML+`
 
 function getForecast(coordinates){
   console.log(coordinates);
-  let apiKey = "cf6b50b908fa2e0baca3eed8a569a5f6";
-  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-
+  let apiKey = "1bec10c5dae0co55a6f6caet0134d33c";
+  let apiURL = `https://api.shecodes.io/weather/v1/forecast?lon={lon}&lat={lat}&key=${apiKey}&units=metric`;
+console.log(apiURL);
   axios.get(apiURL).then(displayForecast);
 }
 
-function showTemperature(response) {
-  console.log(response.data);
-  console.log(response.data.main.temp);
-  let temp = Math.round(response.data.main.temp);
-  let curTemp = document.querySelector("#currentTemperature");
-   let humidity = (document.querySelector("#Humidity").innerHTML =
-    response.data.main.humidity);
-    let iconElement= document.querySelector("#current-weather-icon");
+function displayTemperature(response) {
+ let tempEl= Math.round(response.data.temperature.current);
+  let curTempEl = document.querySelector("#temperature");
+  let cityEl=document.querySelector("#city");
+  let humidityEl = document.querySelector("#humidity");
+  let windEl = document.querySelector("#wind");
+  let dateEl=document.querySelector("#date");
+  let precipitationEl = document.querySelector("#precipitation");
+  let iconEl= document.querySelector("#icon");
 
-  curTemp.innerHTML=`${temp}°`;
-  celsiusTemperature = response.data.main.temp;
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-  iconElement.setAttribute(
+
+curTempEl.innerHTML=`${tempEl}°`;
+cityEl.innerHTML=response.data.city;
+  humidityEl.innerHTML=response.data.temperature.humidity;
+  windEl.innerHTML=Math.round(response.data.wind.speed);
+  precipitationEl.innerHTML=response.data.temperature.precipitation;
+  dateEl.innerHTML=currentTime(response.data.time * 1000);
+  iconEl.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  iconElement.setAttribute("alt", response.data.weather[0].description);
-document.querySelector("#Wind").innerHTML = Math.round(
-    response.data.wind.speed
-  );
-  document.querySelector("#Precipitation").innerHTML =
-    response.data.main.precipitation;
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
+  iconEl.setAttribute("alt", response.data.condition.description);
     
-    getForecast(response.data.coord);
+  getForecast(response.data.coordinates);
+}
+
+function search(city){
+  let apiKey = "1bec10c5dae0co55a6f6caet0134d33c";
+   let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
+  axios.get(apiURL).then(displayTemperature);
 }
 
 function changeCity(event) {
   event.preventDefault();
-  let city = document.querySelector("#currentCity");
-  let searchCity = document.querySelector("#search-city-input");
-
-  city.innerHTML = searchCity.value;
-   let apiKey = "cf6b50b908fa2e0baca3eed8a569a5f6";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity.value}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
-  axios.get(apiUrl).then(showTemperature);
+  let cityInput = document.querySelector("#search-city-input");
+   search(cityInput.value);
+  console.log(cityInput.value);
 }
 
 function showFahrenheit(event){
@@ -105,11 +117,12 @@ function showCelsius(event){
   let temperatureElement = document.querySelector("#currentTemperature");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
-currentTime();
-displayForecast();
+
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", changeCity);
+
+search("New York");
 
 let celsiusTemperature = null;
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
@@ -117,8 +130,6 @@ fahrenheitLink.addEventListener("click", showFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click",showCelsius);
-
-
 
 
 
