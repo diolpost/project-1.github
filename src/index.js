@@ -70,7 +70,6 @@ function displayTemperature(response) {
   let humidityEl = document.querySelector("#humidity");
   let windEl = document.querySelector("#wind");
   let dateEl=document.querySelector("#date");
-  let precipitationEl = document.querySelector("#precipitation");
   let iconEl= document.querySelector("#icon");
 
 
@@ -78,7 +77,6 @@ curTempEl.innerHTML=`${tempEl}°`;
 cityEl.innerHTML=response.data.city;
   humidityEl.innerHTML=response.data.temperature.humidity;
   windEl.innerHTML=Math.round(response.data.wind.speed);
-  precipitationEl.innerHTML=response.data.temperature.precipitation;
   dateEl.innerHTML=currentTime(response.data.time * 1000);
   iconEl.setAttribute(
     "src",
@@ -90,7 +88,7 @@ cityEl.innerHTML=response.data.city;
 
 function search(city){
   let apiKey = "1bec10c5dae0co55a6f6caet0134d33c";
-   let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
+   let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiURL).then(displayTemperature);
 }
 
@@ -101,22 +99,7 @@ function changeCity(event) {
   console.log(cityInput.value);
 }
 
-function showFahrenheit(event){
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#currentTemperature");
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
-}
 
-function showCelsius(event){
-  event.preventDefault();
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  let temperatureElement = document.querySelector("#currentTemperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
 
 
 let searchForm = document.querySelector("#search-form");
@@ -124,9 +107,3 @@ searchForm.addEventListener("submit", changeCity);
 
 search("New York");
 
-let celsiusTemperature = null;
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", showFahrenheit);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click",showCelsius);
