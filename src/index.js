@@ -1,5 +1,5 @@
 function currentTime(timestamp) {
-  let date = new Date(timestamp);
+  let now = new Date(timestamp);
   let hours = now.getHours();
   let minutes = now.getMinutes();
    if (minutes < 10) {
@@ -11,7 +11,7 @@ function currentTime(timestamp) {
   } //1, 2, 3, 4
   let days = 
   ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let day = days[date.getDay()];
+  let day = days[now.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
 
@@ -58,7 +58,7 @@ forecastHTML= forecastHTML+`
 function getForecast(coordinates){
   console.log(coordinates);
   let apiKey = "1bec10c5dae0co55a6f6caet0134d33c";
-  let apiURL = `https://api.shecodes.io/weather/v1/forecast?lon={lon}&lat={lat}&key=${apiKey}&units=metric`;
+  let apiURL = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
 console.log(apiURL);
   axios.get(apiURL).then(displayForecast);
 }
@@ -130,7 +130,3 @@ fahrenheitLink.addEventListener("click", showFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click",showCelsius);
-
-
-
-
